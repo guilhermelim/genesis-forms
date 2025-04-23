@@ -9,10 +9,9 @@ import ServiceGuide from "./ServiceGuide";
 
 function LoadingScreen() {
   return (
-    <div className="min-h-screen bg-gray-50 pb-12">
-      <div className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-8">
-        <div className="text-center py-8">Carregando dados...</div>
-      </div>
+    <div className="min-h-screen bg-gray-50 pb-12 flex flex-col items-center justify-center">
+      <p className="text-lg font-medium text-gray-700">Carregando dados...</p>
+      <div className="mt-4 w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
     </div>
   );
 }
