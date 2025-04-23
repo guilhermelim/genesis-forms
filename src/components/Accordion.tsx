@@ -1,10 +1,10 @@
 "use client";
-
 import { useState } from "react";
+import Markdown from "./Markdown";
 
 interface AccordionItem {
   title: string;
-  content: string;
+  content: string | string[];
 }
 
 interface AccordionProps {
@@ -28,8 +28,19 @@ export default function Accordion({ items }: AccordionProps) {
             </span>
           </button>
           {openIndex === index && (
-            <div className="p-4 bg-white">
-              <p className="text-gray-700">{item.content}</p>
+            <div className="p-4 bg-white text-gray-700 text-justify">
+              {Array.isArray(item.content) ? (
+                item.content.map((paragraph, i) => (
+                  <div
+                    key={i}
+                    className={i !== item.content.length - 1 ? "mb-5" : ""}
+                  >
+                    <Markdown>{paragraph}</Markdown>
+                  </div>
+                ))
+              ) : (
+                <Markdown>{item.content}</Markdown>
+              )}
             </div>
           )}
         </div>
