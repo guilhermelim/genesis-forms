@@ -2,6 +2,8 @@
 import { Member } from "../models/Member";
 import { Service } from "../models/Service";
 import { Registration } from "../models/Registration";
+import { User } from "../auth/model/User"; // Importa o modelo de usuário
+import bcrypt from "bcrypt"; // Para hash de senhas
 import database from "../lib/database";
 
 async function clearCollections() {
@@ -9,6 +11,7 @@ async function clearCollections() {
     Member.deleteMany({}),
     Service.deleteMany({}),
     Registration.deleteMany({}),
+    User.deleteMany({}), // Limpa a coleção de usuários
   ]);
   console.log("Collections cleared!");
 }
@@ -67,6 +70,26 @@ async function seedServices() {
   return services;
 }
 
+async function seedUsers() {
+  const usersData = [
+    {
+      name: "Admin User",
+      email: "admin@example.com",
+      password: await bcrypt.hash("admin123", 10), // Hash da senha
+      role: "admin",
+    },
+    {
+      name: "Regular User",
+      email: "user@example.com",
+      password: await bcrypt.hash("user123", 10), // Hash da senha
+      role: "user",
+    },
+  ];
+  const users = await User.insertMany(usersData);
+  console.log("Users seeded:", users);
+  return users;
+}
+
 async function seedDatabase() {
   try {
     await database.connect();
@@ -74,6 +97,7 @@ async function seedDatabase() {
 
     await seedMembers();
     await seedServices();
+    await seedUsers(); // Adiciona a seed de usuários
 
     console.log("Database seeded successfully!");
   } catch (error) {
