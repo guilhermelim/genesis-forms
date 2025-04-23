@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
+// Interfaces
 interface MemberData {
   id: string;
   name: string;
@@ -26,12 +27,14 @@ interface DataContextProps {
   unavailableServices: string[];
   loading: boolean;
   error: string | null;
-  fetchData: () => Promise<void>;
+  update: () => Promise<void>;
 }
 
+// Contexto
 const DataContext = createContext<DataContextProps | undefined>(undefined);
 
-export const DataProvider = ({ children }: { children: React.ReactNode }) => {
+// Hook personalizado para encapsular a lógica de estado e carregamento
+const useDataProvider = () => {
   const [members, setMembers] = useState<MemberData[]>([]);
   const [services, setServices] = useState<ServiceData[]>([]);
   const [registrations, setRegistrations] = useState<RegistrationData[]>([]);
@@ -40,7 +43,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchData = async () => {
+  const update = async () => {
     setLoading(true);
     setError(null);
 
@@ -64,27 +67,29 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    fetchData();
+    update();
   }, []);
 
-  return (
-    <DataContext.Provider
-      value={{
-        members,
-        services,
-        registrations,
-        unavailableMembers,
-        unavailableServices,
-        loading,
-        error,
-        fetchData,
-      }}
-    >
-      {children}
-    </DataContext.Provider>
-  );
+  return {
+    members,
+    services,
+    registrations,
+    unavailableMembers,
+    unavailableServices,
+    loading,
+    error,
+    update,
+  };
 };
 
+// Provider
+export const DataProvider = ({ children }: { children: React.ReactNode }) => {
+  const data = useDataProvider();
+
+  return <DataContext.Provider value={data}>{children}</DataContext.Provider>;
+};
+
+// Hook para consumir o contexto
 export const useDataContext = () => {
   const context = useContext(DataContext);
   if (!context) {

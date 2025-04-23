@@ -76,13 +76,8 @@ function SubmitButton({
 }
 
 export default function Form() {
-  const {
-    members,
-    services,
-    unavailableMembers,
-    unavailableServices,
-    fetchData,
-  } = useDataContext();
+  const { members, services, unavailableMembers, unavailableServices, update } =
+    useDataContext();
 
   const [selectedMember, setSelectedMember] = useState("");
   const [selectedService, setSelectedService] = useState("");
@@ -110,7 +105,7 @@ export default function Form() {
         throw new Error("Erro ao enviar formulário");
       }
 
-      await fetchData(); // Atualiza os dados após o envio
+      await update(); // Atualiza os dados após o envio
       setSelectedMember("");
       setSelectedService("");
     } catch (err: unknown) {
