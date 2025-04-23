@@ -19,6 +19,7 @@ interface RegistrationData {
   member: { _id: string; name: string };
   service: { _id: string; name: string };
   date: string;
+  observations?: string; // Adicionado campo opcional
 }
 
 interface FormattedService {
@@ -36,6 +37,7 @@ interface FormattedRegistration {
     name: string;
   };
   date: string;
+  observations: string | null; // Adicionado campo opcional
 }
 
 // Função principal da rota
@@ -105,6 +107,7 @@ function formatRegistrations(
       name: registration.service.name,
     },
     date: registration.date,
+    observations: registration.observations || null, // Inclui o campo "observations"
   }));
 }
 

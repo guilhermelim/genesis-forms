@@ -11,6 +11,10 @@ const registrationSchema = new Schema({
     ref: "Service",
     required: true,
   },
+  observations: {
+    type: String,
+    required: false,
+  },
   date: {
     type: Date,
     default: Date.now,

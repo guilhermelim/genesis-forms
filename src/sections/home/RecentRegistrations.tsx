@@ -11,6 +11,7 @@ interface Registration {
     name: string;
   };
   date: string | number | Date;
+  observations?: string; // Adicionado o campo opcional
 }
 
 function RegistrationItem({ registration }: { registration: Registration }) {
@@ -23,6 +24,13 @@ function RegistrationItem({ registration }: { registration: Registration }) {
       <p className="text-sm text-gray-500">
         {new Date(registration.date).toLocaleString()}
       </p>
+      {/* Exibe o campo de observações, se estiver presente */}
+      {registration.observations && (
+        <p className="text-sm text-gray-700 mt-2">
+          <span className="font-medium">Observações:</span>{" "}
+          {registration.observations}
+        </p>
+      )}
     </li>
   );
 }

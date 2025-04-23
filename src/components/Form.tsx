@@ -19,7 +19,7 @@ function SelectField({
   options,
   unavailableOptions,
   isSubmitting,
-  hideUnavailable = false, // Nova prop com valor padrão
+  hideUnavailable = false,
 }: {
   id: string;
   label: string;
@@ -28,7 +28,7 @@ function SelectField({
   options: { id: string; name: string }[];
   unavailableOptions: string[];
   isSubmitting: boolean;
-  hideUnavailable?: boolean; // Nova prop opcional
+  hideUnavailable?: boolean;
 }) {
   return (
     <div>
@@ -48,14 +48,14 @@ function SelectField({
           .filter(
             (option) =>
               !hideUnavailable || !unavailableOptions.includes(option.id)
-          ) // Filtra se hideUnavailable for true
+          )
           .map((option) => (
             <option
               key={option.id}
               value={option.id}
               disabled={
                 !hideUnavailable && unavailableOptions.includes(option.id)
-              } // Desabilita se hideUnavailable for false
+              }
             >
               {option.name}{" "}
               {!hideUnavailable &&
@@ -87,17 +87,23 @@ function SubmitButton({
 }
 
 export default function Form({
-  hideUnavailable = false, // Nova prop com valor padrão
+  hideUnavailable = false,
 }: {
-  hideUnavailable?: boolean; // Nova prop opcional
+  hideUnavailable?: boolean;
 }) {
   const { members, services, unavailableMembers, unavailableServices, update } =
     useDataContext();
 
   const [selectedMember, setSelectedMember] = useState("");
   const [selectedService, setSelectedService] = useState("");
+  const [observations, setObservations] = useState(""); // Novo estado para o campo de texto
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+
+  // Obter o nome do serviço selecionado
+  const selectedServiceName = services.find(
+    (service) => service.id === selectedService
+  )?.name;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -113,6 +119,10 @@ export default function Form({
         body: JSON.stringify({
           memberId: selectedMember,
           serviceId: selectedService,
+          observations:
+            selectedServiceName === "7:30h - Adoração"
+              ? observations
+              : undefined, // Inclui observações apenas se o serviço for "7:30h - Adoração"
         }),
       });
 
@@ -123,6 +133,7 @@ export default function Form({
       await update(); // Atualiza os dados após o envio
       setSelectedMember("");
       setSelectedService("");
+      setObservations("");
     } catch (err: unknown) {
       setError(
         (err as Error).message || "Ocorreu um erro ao enviar o formulário"
@@ -144,7 +155,7 @@ export default function Form({
         options={members}
         unavailableOptions={unavailableMembers}
         isSubmitting={isSubmitting}
-        hideUnavailable={hideUnavailable} // Passa a prop hideUnavailable
+        hideUnavailable={hideUnavailable}
       />
 
       <SelectField
@@ -155,8 +166,28 @@ export default function Form({
         options={services}
         unavailableOptions={unavailableServices}
         isSubmitting={isSubmitting}
-        hideUnavailable={hideUnavailable} // Passa a prop hideUnavailable
+        hideUnavailable={hideUnavailable}
       />
+
+      {/* Campo de texto para observações */}
+      {selectedServiceName === "7:30h - Adoração" && (
+        <div>
+          <label
+            htmlFor="observations"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Observações
+          </label>
+          <textarea
+            id="observations"
+            value={observations}
+            onChange={(e) => setObservations(e.target.value)}
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md border bg-white text-gray-800"
+            rows={3}
+            placeholder="Digite suas observações aqui"
+          />
+        </div>
+      )}
 
       <SubmitButton
         isSubmitting={isSubmitting}

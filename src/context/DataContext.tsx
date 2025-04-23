@@ -17,6 +17,7 @@ interface RegistrationData {
   member: { _id: string; name: string };
   service: { _id: string; name: string };
   date: string;
+  observations?: string;
 }
 
 interface DataContextProps {

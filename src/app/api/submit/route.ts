@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   try {
     await database.connect();
 
-    const { memberId, serviceId } = await request.json();
+    const { memberId, serviceId, observations } = await request.json(); // Inclui "observations"
 
     // Validações
     await validateMember(memberId);
@@ -16,7 +16,11 @@ export async function POST(request: Request) {
     await validateExistingRegistration(memberId, serviceId);
 
     // Cria o novo registro
-    const newRegistration = await createRegistration(memberId, serviceId);
+    const newRegistration = await createRegistration(
+      memberId,
+      serviceId,
+      observations
+    );
 
     return NextResponse.json(
       { success: true, registration: newRegistration },
@@ -69,10 +73,15 @@ async function validateExistingRegistration(
   }
 }
 
-async function createRegistration(memberId: string, serviceId: string) {
+async function createRegistration(
+  memberId: string,
+  serviceId: string,
+  observations?: string
+) {
   const newRegistration = new Registration({
     member: memberId,
     service: serviceId,
+    observations,
   });
   await newRegistration.save();
   return newRegistration;
