@@ -24,7 +24,7 @@ export default function FormSection() {
           <h1 className="text-xl font-bold text-gray-800 mb-2">
             Escolha como você deseja servir neste encontro
           </h1>
-          <Form />
+          <Form hideUnavailable />
         </>
       )}
     </div>

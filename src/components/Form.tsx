@@ -19,6 +19,7 @@ function SelectField({
   options,
   unavailableOptions,
   isSubmitting,
+  hideUnavailable = false, // Nova prop com valor padrão
 }: {
   id: string;
   label: string;
@@ -27,6 +28,7 @@ function SelectField({
   options: { id: string; name: string }[];
   unavailableOptions: string[];
   isSubmitting: boolean;
+  hideUnavailable?: boolean; // Nova prop opcional
 }) {
   return (
     <div>
@@ -42,16 +44,25 @@ function SelectField({
         disabled={isSubmitting}
       >
         <option value="">Selecione {label.toLowerCase()}</option>
-        {options.map((option) => (
-          <option
-            key={option.id}
-            value={option.id}
-            disabled={unavailableOptions.includes(option.id)}
-          >
-            {option.name}{" "}
-            {unavailableOptions.includes(option.id) && "(Indisponível)"}
-          </option>
-        ))}
+        {options
+          .filter(
+            (option) =>
+              !hideUnavailable || !unavailableOptions.includes(option.id)
+          ) // Filtra se hideUnavailable for true
+          .map((option) => (
+            <option
+              key={option.id}
+              value={option.id}
+              disabled={
+                !hideUnavailable && unavailableOptions.includes(option.id)
+              } // Desabilita se hideUnavailable for false
+            >
+              {option.name}{" "}
+              {!hideUnavailable &&
+                unavailableOptions.includes(option.id) &&
+                "(Indisponível)"}
+            </option>
+          ))}
       </select>
     </div>
   );
@@ -75,7 +86,11 @@ function SubmitButton({
   );
 }
 
-export default function Form() {
+export default function Form({
+  hideUnavailable = false, // Nova prop com valor padrão
+}: {
+  hideUnavailable?: boolean; // Nova prop opcional
+}) {
   const { members, services, unavailableMembers, unavailableServices, update } =
     useDataContext();
 
@@ -129,6 +144,7 @@ export default function Form() {
         options={members}
         unavailableOptions={unavailableMembers}
         isSubmitting={isSubmitting}
+        hideUnavailable={hideUnavailable} // Passa a prop hideUnavailable
       />
 
       <SelectField
@@ -139,6 +155,7 @@ export default function Form() {
         options={services}
         unavailableOptions={unavailableServices}
         isSubmitting={isSubmitting}
+        hideUnavailable={hideUnavailable} // Passa a prop hideUnavailable
       />
 
       <SubmitButton
