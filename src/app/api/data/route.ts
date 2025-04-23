@@ -77,10 +77,12 @@ function extractUnavailableIds(
 }
 
 function formatMembers(members: MemberData[]): { id: string; name: string }[] {
-  return members.map((member) => ({
-    id: member._id.toString(),
-    name: member.name,
-  }));
+  return members
+    .map((member) => ({
+      id: member._id.toString(),
+      name: member.name,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
 }
 
 function formatServices(services: ServiceData[]): FormattedService[] {
