@@ -1,5 +1,4 @@
 "use client";
-
 import Accordion from "@/components/Accordion";
 
 export default function ServiceGuide() {
