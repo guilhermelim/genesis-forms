@@ -19,20 +19,18 @@ async function clearCollections() {
 async function seedMembers() {
   const membersData = [
     { name: "Adolfo Lima" },
-    { name: "Alice Lima" },
     { name: "Alessandro Nogueira" },
+    { name: "Alice Lima" },
     { name: "Aparecida Bezerra" },
     { name: "Caio Farias" },
     { name: "Elias Francisco da ..." },
     { name: "Elisa Emily Freire ..." },
     { name: "Evanildo Carvalho" },
-    { name: "Guilherne Lima" },
     { name: "Iudy Fernandes Souz..." },
     { name: "Iury Fernandes Souz..." },
-    { name: "Izabelly Lima" },
-    { name: "Júlia Lima" },
     { name: "José Machado Neto" },
     { name: "Josias Junior" },
+    { name: "Júlia Lima" },
     { name: "Kalebe Ramalho Lima" },
     { name: "Lenice Lima" },
     { name: "Lucas Corteletti" },
@@ -44,8 +42,8 @@ async function seedMembers() {
     { name: "Paulo Ramalho Lima" },
     { name: "Philipe Lima" },
     { name: "Raquel Paixão" },
-    { name: "Rose Ramalho Lima" },
     { name: "Rodrigo Ribeiro Cor..." },
+    { name: "Rose Ramalho Lima" },
     { name: "Sofia Ramalho Lima" },
   ];
   const members = await Member.insertMany(membersData);
