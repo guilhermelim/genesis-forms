@@ -1,10 +1,8 @@
 export default function LifeGroupInfo() {
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-      <h2 className="text-xl font-bold text-gray-800 mb-2">Life Group 119</h2>
-      <p className="text-gray-600 mb-4">
-        11/06/2025 - A síndrome do bezerro de ouro
-      </p>
+      <h2 className="text-xl font-bold text-gray-800 mb-2">Life Group 120</h2>
+      <p className="text-gray-600 mb-4">18/06/2025 - Entre o céu e a terra</p>
       <p className="text-sm text-gray-500">
         (Somente membros do life group estarão listados neste campo. Cada
         serviço só pode ser realizado por um membro no mesmo encontro, exceto no
