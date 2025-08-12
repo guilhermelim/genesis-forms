@@ -45,6 +45,8 @@ async function seedMembers() {
     { name: "Rodrigo Ribeiro Cor..." },
     { name: "Rose Ramalho Lima" },
     { name: "Sofia Ramalho Lima" },
+    { name: "Denise Moreira Bezerra" },
+    { name: "Luis Fernando de Souza" },
   ];
   const members = await Member.insertMany(membersData);
   console.log("Members seeded:", members);
