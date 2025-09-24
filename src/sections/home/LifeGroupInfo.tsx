@@ -1,9 +1,9 @@
 export default function LifeGroupInfo() {
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-      <h2 className="text-xl font-bold text-gray-800 mb-2">Life Group 133</h2>
+      <h2 className="text-xl font-bold text-gray-800 mb-2">Life Group 134</h2>
       <p className="text-gray-600 mb-4">
-        17/09/2025 - Como Dominar o Ego e Viver Cheio de Cristo.
+        24/09/2025 - Novos Começos : Ep1: Um novo começo em direção à promessa.
       </p>
       <p className="text-sm text-gray-500">
         (Somente membros do life group estarão listados neste campo. Cada

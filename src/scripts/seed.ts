@@ -25,13 +25,13 @@ async function seedMembers() {
     { name: "Caio Henrique Gomes Farias" },
     { name: "Cecília Rabelo" },
     { name: "Denise Moreira Bezerra" },
-    { name: "Elias Francisco da Silva" },
+    { name: "Elias Francisco da Silva" }, // mantido completo
     { name: "Elisa Emily Freire" },
     { name: "Evanildo Carvalho" },
-    { name: "Guilherme Lima" }, // Adicionado
+    { name: "Guilherme Lima" },
     { name: "Iudy Fernandes Souza" },
     { name: "Iury Fernandes Souza" },
-    { name: "Izabelly Lima" }, // Adicionado
+    { name: "Izabelly Lima" },
     { name: "Jairo Inácio" },
     { name: "José Machado Neto" },
     { name: "Josias Junior" },
@@ -40,15 +40,17 @@ async function seedMembers() {
     { name: "Lenice Lima" },
     { name: "Lilian Machado" },
     { name: "Lucas Corteletti" },
-    { name: "Luis Fernando de Souza" }, // Corrigido e reordenado
-    { name: "Mara Ribeiro" }, // Corrigido
-    { name: "Marcelo Queiroz" }, // Corrigido
+    { name: "Luis Fernando de Souza" },
+    { name: "Mara Ribeiro" },
+    { name: "Marcelo Queiroz" },
+    { name: "Márcia Mariella" }, // adicionado
+    { name: "Maria da Paz Guedes" }, // adicionado
     { name: "Nagelia Oliveira" },
-    { name: "Nayane Machado Freitas" },
-    { name: "Noelma Fernandes Souza" },
+    { name: "Nayane Machado Freitas" }, // mantido completo
+    { name: "Noelma Fernandes Souza" }, // mantido completo
     { name: "Paulo Ramalho Lima" },
-    { name: "Philipe Lima" },
-    { name: "Raquel Paixão" },
+    { name: "Philipe Moreira Lima" }, // mantido completo
+    { name: "Raquel Pereira Paixao" }, // atualizado para nome completo
     { name: "Rodrigo Ribeiro Corteletti" },
     { name: "Rose Ramalho Lima" },
     { name: "Sofia Ramalho Lima" },
