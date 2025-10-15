@@ -2,10 +2,7 @@ export default function LifeGroupInfo() {
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mb-8">
       <h2 className="text-xl font-bold text-gray-800 mb-2">Life Group 136</h2>
-      <p className="text-gray-600 mb-4">
-        08/10/2025 - SÉRIE: Novos Começos | Ep3 - Novos Começos
-        na vida espiritual.
-      </p>
+      <p className="text-gray-600 mb-4">14/10/2025 - Colunas</p>
       <p className="text-sm text-gray-500">
         (Somente membros do life group estarão listados neste campo. Cada
         serviço só pode ser realizado por um membro no mesmo encontro, exceto no
